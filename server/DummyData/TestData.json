@@ -1,0 +1,23 @@
+{
+  "wordList": [
+    { "id": 1, "word": "slowly", "pos": "adverb", "sentence": "I've been slowly familiarizing myself with the neighborhood."},
+    { "id": 2, "word": "ride", "pos": "verb", "sentence": "I like the way they play by heart, the open polo they play, and the way they ride on horseback." },
+    { "id": 3, "word": "bus", "pos": "noun", "sentence": "This bus blocks the exit from the public car park resulting in vehicles using the entrance to exit." },
+    { "id": 4, "word": "commute", "pos": "verb", "sentence": "Do you commute to work or spend a lot of time traveling to meetings and conferences?" },
+    { "id": 5, "word": "emissions", "pos": "noun", "sentence": "These same emissions zones will also catch clapped-out old bangers and poorly-maintained lorries and vans." },
+    { "id": 6, "word": "walk", "pos": "verb", "sentence": "Now they would have to wait for some hours before the horses were able to walk again." },
+    { "id": 7, "word": "fast", "pos": "adjective", "sentence": "We've got excellent linebackers because of the speed there, and we're fast and quick up front." },
+    { "id": 8, "word": "car", "pos": "noun", "sentence": "Under the right conditions the car can reach speeds over 200 miles an hour" },
+    { "id": 9, "word": "crowded", "pos": "adjective", "sentence": "Using it first time in a crowded boat in a rough sea is a recipe for disaster." },
+    { "id": 10, "word": "arrival", "pos": "noun", "sentence": "We don't have much more time to prepare ourselves for their arrival." },
+    { "id": 11, "word": "emit", "pos": "verb", "sentence": "When the electrons return to a relaxed state, they emit photons and produce light." },
+    { "id": 12, "word": "independent", "pos": "adjective", "sentence": "An independent variable is the variable you have control over, what you can choose and manipulate." },
+    { "id": 13, "word": "convenient", "pos": "adjective", "sentence": "You can freeze your starter yogurt in ice cube trays so that it is convenient to have on hand." },
+    { "id": 14, "word": "lane", "pos": "noun", "sentence": "Cars were slowly working through the single lane open, and traffic queued back in each direction." },
+    { "id": 15, "word": "heavily", "pos": "adverb", "sentence": "Until 1500 BC, eastern coastal areas of the Mediterranean were most heavily cultivated." }
+  ],
+  "scoresList": [
+    20, 90, 100, 50, 10, 50, 60, 0, 60, 10, 90, 30, 100, 30, 20, 90, 40, 20, 10,
+    60, 50, 100, 50, 80, 50, 80, 60, 80, 10, 40
+  ]
+}

@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react"
 
-
-export default function useFetch(url: string) {
-  const [data, dataUpdater] = useState(null)
-  const [error, errorUpdater] = useState(null)
+export default function useFetch(url: string, options?: object) {
+  const [data, dataUpdater] = useState<any>([])
+  const [error, errorUpdater] = useState(false)
   const [loading, loadingUpdater] = useState(false)
+  /* i am using object here as initial value because it is (reference type) so when i call it:
+  refetch({})
+  state value well change because it is not the same object in memory
+  */
+  const [shouldRefetch, refetch] = useState({})
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       try {
         loadingUpdater(true)
-        const res = await fetch(url)
-        const data = await res.json()
-        dataUpdater(data)
+        const res = await fetch(url, options)
+        const comingData = await res.json()
+        dataUpdater(comingData)
         loadingUpdater(false)
       } catch (error: any) {
         errorUpdater(error)
       }
     })()
-  }, [url])
+  }, [url, shouldRefetch, options])
 
-  return { data, error, loading }
+  return { data, error, loading, refetch }
 }
