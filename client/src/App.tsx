@@ -73,7 +73,6 @@ export const App: FC = () => {
   const [modalVisibility, modalVisibilityUpdater] = useState(false)
   const [feedback, feedbackUpdater] = useState({ shown: false, value: false })
 
-
   const didntReachEnd = progress < wordsLength
 
   ///
@@ -214,16 +213,12 @@ export const App: FC = () => {
       <>
         <section className={`${classes.test}`}>
           <div className={`${classes.top} centerMargin centerFlexY`}>
-            {didntReachEnd ? (
-              <button
-                onClick={resetTest}
-                className={`textBtn dangerColor capitalize`}
-              >
-                Cancel
-              </button>
-            ) : (
-              <p className={`${classes.top__done} capitalize`}>done</p>
-            )}
+            <button
+              onClick={resetTest}
+              className={`textBtn dangerColor capitalize`}
+            >
+              Cancel
+            </button>
 
             <Progress progress={progress} wordsLength={wordsLength} />
 
