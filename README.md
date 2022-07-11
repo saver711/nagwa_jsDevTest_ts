@@ -34,12 +34,17 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd TheProject
+  cd nagwa_jsDevTest_ts
 ```
 
 Install dependencies
 
 ```bash
+  cd server
+  npm i
+```
+```bash
+  cd client
   npm i
 ```
 
