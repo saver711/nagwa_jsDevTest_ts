@@ -111,19 +111,19 @@ export const App: FC = () => {
     if (wordsLength - progress === 0) modalVisibilityUpdater(!didntReachEnd)
   }, [didntReachEnd])
 
-  /*--- ⬇️ reset the test if the user leave test tab ---*/
-  // useEffect(() => {
-  //   const handleBlur = () => {
-  //     if (mode === "test") {
-  //       resetTest()
-  //     }
-  //   }
-  //   window.addEventListener("blur", handleBlur)
+  /*--- ⬇️ reset the test if the user leaves test tab ---*/
+  useEffect(() => {
+    const handleBlur = () => {
+      if (mode === "test") {
+        resetTest()
+      }
+    }
+    window.addEventListener("blur", handleBlur)
 
-  //   return () => {
-  //     window.removeEventListener("blur", handleBlur)
-  //   }
-  // }, [mode])
+    return () => {
+      window.removeEventListener("blur", handleBlur)
+    }
+  }, [mode])
 
   ///
   /////////// IF CASES
