@@ -133,13 +133,14 @@ export const App: FC = () => {
   /////////// EVENTS
   ///
   const resetTest = () => {
-    autoNextUpdater(false)
+    // autoNextUpdater(false)
     modeUpdater("start")
     rightAnswersUpdater(0)
     wrongAnswersUpdater(0)
     answerSelectedUpdater(false)
     progressUpdater(0)
     refetch({})
+    // feedbackUpdater({ shown: false, value: false })
   }
 
   const skipHandler = () => {
@@ -250,6 +251,7 @@ export const App: FC = () => {
                       className={`d-none`}
                       name="toggle"
                       id="toggle"
+                      checked={feedback.value}
                     />
                     <label htmlFor="toggle" onClick={toggleAutoNext}>
                       <span className={`${classes.auto__circle}`}></span>
