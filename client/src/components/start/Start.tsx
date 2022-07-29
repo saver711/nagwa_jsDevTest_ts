@@ -76,7 +76,7 @@ export const Start: FC<StartProps> = ({ modeUpdateHandler }) => {
           <Button clickHandler={clickHandler} type="primary" text="Start" />
         </div>
 
-        <p className={`${classes.start__note} centerMargin`}>Note: Once you click on START, Don't leave test page or the test will be cancelled.</p>
+        <p className={`${classes.start__note} centerText centerMargin`}>Note: Once you click on START, Don't leave test page or the test will be cancelled.</p>
       </section>
     </>
   )
