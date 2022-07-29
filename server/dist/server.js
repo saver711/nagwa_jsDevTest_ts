@@ -30,10 +30,7 @@ app.post("/rank", jsonParser, (req, res) => {
     const sentRank = rank % 1 != 0 ? rank.toFixed(2) : rank;
     res.json(sentRank);
 });
-app.use(express_1.default.static(path.resolve(__dirname, "../../client/build")));
-app.get("*", (_req, res) => {
-    res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
-});
+app.use(express_1.default.static(path.join(__dirname + "/public")));
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running at: http://localhost:${PORT}/`));
 //# sourceMappingURL=server.js.map

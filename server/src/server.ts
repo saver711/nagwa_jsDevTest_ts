@@ -52,16 +52,16 @@ app.post("/rank", jsonParser, (req: Request, res: Response) => {
   res.json(sentRank)
 })
 //for heroku
-app.use(express.static(path.resolve(__dirname, "../../client/build")))
+app.use(express.static(path.join(__dirname, "../client/build")))
 app.get("*", (_req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"))
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"))
 })
-/* 
-"install-client": "cd .. && cd .. && cd client && npm i",
-    "build": "cd .. && cd .. && cd client && npm run build",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "node server.js"
+/* server > package.json
+  "heroku-postbuild": "cd client && npm install && npm run build"
 */
+/* client > env
+REACT_APP_SERVER=https://englishexam.herokuapp.com/server
+ */
 
 // make the server listen to requests 🙉
 const PORT = process.env.PORT || 8000
