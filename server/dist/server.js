@@ -8,6 +8,7 @@ var cors = require("cors");
 const dotenv_1 = __importDefault(require("dotenv"));
 const fs_1 = __importDefault(require("fs"));
 const bodyParser = require("body-parser");
+const path = require('path');
 const app = (0, express_1.default)();
 app.use(cors());
 dotenv_1.default.config();
@@ -28,6 +29,10 @@ app.post("/rank", jsonParser, (req, res) => {
     const rank = (scoresBelowStudentScore / scoresList.length) * 100;
     const sentRank = rank % 1 != 0 ? rank.toFixed(2) : rank;
     res.json(sentRank);
+});
+app.use(express_1.default.static(path.resolve(__dirname, "../../client/build")));
+app.get("*", (_req, res) => {
+    res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
 });
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running at: http://localhost:${PORT}/`));

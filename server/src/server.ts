@@ -5,6 +5,9 @@ import dotenv from "dotenv" //load environment variables from a .env file
 import fs from "fs"
 const bodyParser = require("body-parser")
 
+//for heroku
+const path = require('path')
+
 // config 👨‍🔧
 const app: Application = express() // start a new Express application
 app.use(cors())
@@ -48,6 +51,17 @@ app.post("/rank", jsonParser, (req: Request, res: Response) => {
 
   res.json(sentRank)
 })
+//for heroku
+app.use(express.static(path.resolve(__dirname, "../../client/build")))
+app.get("*", (_req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"))
+})
+/* 
+"install-client": "cd .. && cd .. && cd client && npm i",
+    "build": "cd .. && cd .. && cd client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server.js"
+*/
 
 // make the server listen to requests 🙉
 const PORT = process.env.PORT || 8000
