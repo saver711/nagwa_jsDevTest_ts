@@ -36,7 +36,7 @@
     /* Modules */
     "module": "commonjs",                                /* Specify what module code is generated. */
     //👀 rootDir
-    "rootDir": "./src",                                  /* Specify the root folder within your source files. */
+    // "rootDir": "./src",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
     // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
@@ -62,7 +62,7 @@
     // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
     //👀 outDir
     //👀 لو انا حاطط الفايل في فولدر في السورس بيروح بردو في الديست في فولدر بنفس الاسم
-    "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
+    // "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
     //👀 removeComments
     "removeComments": true,                           /* Disable emitting comments. */
     //👀 noEmit
@@ -120,7 +120,7 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  // "exclude": [
+  "exclude": [
     /* 👀 files */
     // "anyFile.ts",
     // "*.dev.ts",
@@ -129,8 +129,10 @@
     // "**/*.dev.ts",
 
     /* 👀 folders */
-    // "node_modules" // node_modules is automatically excluded by default, but if i add "exclude" : [] , i need to explicitly exclude node_modules 
-  // ],
+    // "node_modules" // node_modules is automatically excluded by default, but if i add "exclude" : [] , i need to explicitly exclude node_modules
+    "node_modules",
+    "client"
+  ],
   // "include": [
     /* 👀 just include files && folders specified here */
   // ]

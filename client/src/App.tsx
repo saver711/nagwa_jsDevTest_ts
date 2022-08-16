@@ -1,7 +1,16 @@
+/* 👀 Some differences from last time 
+1- Better implementation of Typescript
+--- eg: FC was removed because:
+------ *children props were implicitly added
+------ *Generic Type was not supported on children
+2- added "result" mode for better app state control
+2- Enhanced "reset text functionality" when the user leaves the test page
+--- the feature only works in "test mode" (Neither in "start" nor "result")
+*/
 /////////// IMPORTS
 ///
 import classes from "./App.module.css"
-/* IMPORTS (ICONS) */
+/* (ICONS) */
 import { IoMdDoneAll } from "react-icons/io"
 import { BsArrowCounterclockwise } from "react-icons/bs"
 
@@ -9,20 +18,27 @@ import { BsArrowCounterclockwise } from "react-icons/bs"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-import { FC, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import useFetch from "./hooks/useFetch"
 import { Start } from "./components/start/Start"
 import { Progress } from "./components/progress/Progress"
 import { Question } from "./components/question/Question"
 import { Answer } from "./components/answer/Answer"
-import { Button } from "./components/UI/button/Button"
+import { MainButton } from "./components/UI/mainButton/MainButton"
 import { Modal } from "./components/UI/modal/Modal"
 import { Rank } from "./components/rank/Rank"
+import { Button } from "./components/UI/buton/Button"
 
 ///
 /////////// Types
 ///
-export type Modes = "test" | "start"
+interface wordsType {
+  id: number
+  word: string
+  pos: string
+  sentence: string
+}
+export type Modes = "test" | "start" | "result"
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
 
@@ -45,7 +61,7 @@ const answersList = [
   },
 ]
 ///
-export const App: FC = () => {
+export const App = () => {
   /////////// VARIABLES
   ///
 
@@ -57,9 +73,11 @@ export const App: FC = () => {
     error,
     loading,
     refetch,
-  } = useFetch(`${process.env.REACT_APP_SERVER}/words`)
+  } = useFetch<wordsType[]>(`${process.env.REACT_APP_SERVER}/words`)
+
 
   const wordsLength = words.length
+
   ///
   /////////// STATES
   ///
@@ -73,11 +91,12 @@ export const App: FC = () => {
   const [modalVisibility, modalVisibilityUpdater] = useState(false)
   const [feedback, feedbackUpdater] = useState({ shown: false, value: false })
 
-  const didntReachEnd = progress < wordsLength
+  const didntReachEnd = progress < wordsLength!
 
   ///
   /////////// SIDE EFFECTS
   ///
+
   /*--- ⬇️ hide autoNext feedback ---*/
   useEffect(() => {
     let counter: ReturnType<typeof setTimeout>
@@ -100,7 +119,7 @@ export const App: FC = () => {
       timer = setTimeout(() => {
         progressUpdater((prev) => prev + 1)
         answerSelectedUpdater(false)
-      }, 1200)
+      }, 700)
     }
 
     return () => clearTimeout(timer)
@@ -108,20 +127,20 @@ export const App: FC = () => {
 
   /*--- ⬇️ show result modal  ---*/
   useEffect(() => {
-    if (wordsLength - progress === 0) modalVisibilityUpdater(!didntReachEnd)
-  }, [didntReachEnd])
+    if (wordsLength - progress === 0 && mode === "test") {
+      modalVisibilityUpdater(!didntReachEnd)
+      modeUpdater("result")
+    }
+  }, [didntReachEnd, mode])
 
   /*--- ⬇️ reset the test if the user leaves test tab ---*/
   useEffect(() => {
-    const handleBlur = () => {
-      if (mode === "test") {
-        resetTest()
-      }
+    if (mode === "test") {
+      window.addEventListener("blur", resetTest)
     }
-    window.addEventListener("blur", handleBlur)
 
     return () => {
-      window.removeEventListener("blur", handleBlur)
+      window.removeEventListener("blur", resetTest)
     }
   }, [mode])
 
@@ -133,14 +152,12 @@ export const App: FC = () => {
   /////////// EVENTS
   ///
   const resetTest = () => {
-    // autoNextUpdater(false)
     modeUpdater("start")
     rightAnswersUpdater(0)
     wrongAnswersUpdater(0)
     answerSelectedUpdater(false)
     progressUpdater(0)
     refetch({})
-    // feedbackUpdater({ shown: false, value: false })
   }
 
   const skipHandler = () => {
@@ -199,6 +216,7 @@ export const App: FC = () => {
     answerSelectedUpdater(false)
     toggleRetryUpdater((prev) => !prev)
     modalVisibilityUpdater(false)
+    modeUpdater("test")
   }
 
   ///
@@ -214,24 +232,24 @@ export const App: FC = () => {
       <>
         <section className={`${classes.test}`}>
           <div className={`${classes.top} centerMargin centerFlexY`}>
-            <button
+            <Button
               onClick={resetTest}
               className={`textBtn dangerColor capitalize`}
             >
               Cancel
-            </button>
+            </Button>
 
             <Progress progress={progress} wordsLength={wordsLength} />
 
             {didntReachEnd ? (
-              <button
+              <Button
                 onClick={skipHandler}
                 className={`textBtn darkColor capitalize ${
                   answerSelected ? "disabled" : ""
                 }`}
               >
                 Skip
-              </button>
+              </Button>
             ) : (
               <div className={`${classes.top__icon}`}>
                 <IoMdDoneAll />
@@ -239,6 +257,7 @@ export const App: FC = () => {
             )}
           </div>
 
+          {/* exam sheet */}
           {didntReachEnd && (
             <div
               className={`${classes.sheet} centerMargin boxy blackBoldBorder`}
@@ -251,7 +270,7 @@ export const App: FC = () => {
                       className={`d-none`}
                       name="toggle"
                       id="toggle"
-                      checked={feedback.value}
+                      defaultChecked={feedback.value}
                     />
                     <label htmlFor="toggle" onClick={toggleAutoNext}>
                       <span className={`${classes.auto__circle}`}></span>
@@ -291,21 +310,75 @@ export const App: FC = () => {
 
           <div className={`${classes.btns} centerFlex`}>
             {!autoNext && didntReachEnd && (
-              <Button
+              <MainButton
                 type="primary"
                 text="Continue"
                 clickHandler={ProceedHandler}
               />
             )}
-            {!didntReachEnd && (
+            <MainButton
+              type="transparent"
+              icon={<BsArrowCounterclockwise />}
+              text="Retry"
+              clickHandler={retryHandler}
+            />
+          </div>
+        </section>
+
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </>
+    )
+  }
+  if (mode === "result") {
+    return (
+      <>
+        <section className={`${classes.test}`}>
+          <div className={`${classes.top} centerMargin centerFlexY`}>
+            <Button
+              onClick={resetTest}
+              className={`textBtn dangerColor capitalize`}
+            >
+              Cancel
+            </Button>
+
+            <Progress progress={progress} wordsLength={wordsLength} />
+
+            {didntReachEnd ? (
               <Button
+                onClick={skipHandler}
+                className={`textBtn darkColor capitalize ${
+                  answerSelected ? "disabled" : ""
+                }`}
+              >
+                Skip
+              </Button>
+            ) : (
+              <div className={`${classes.top__icon}`}>
+                <IoMdDoneAll />
+              </div>
+            )}
+          </div>
+
+          <div className={`${classes.btns} centerFlex`}>
+            {!didntReachEnd && (
+              <MainButton
                 type="primary"
                 text="Result"
                 clickHandler={() => modalVisibilityUpdater(true)}
               />
             )}
 
-            <Button
+            <MainButton
               type="transparent"
               icon={<BsArrowCounterclockwise />}
               text="Retry"
@@ -324,18 +397,6 @@ export const App: FC = () => {
             />
           </Modal>
         )}
-
-        <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </>
     )
   }

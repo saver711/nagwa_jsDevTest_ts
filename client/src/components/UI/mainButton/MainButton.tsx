@@ -1,6 +1,5 @@
 /////////// IMPORTS
 ///
-import React, { FC } from "react"
 import classes from "./Button.module.css"
 ///
 /////////// Types
@@ -15,7 +14,7 @@ interface ButtonProps {
 ///
 
 ///
-export const Button: FC<ButtonProps> = ({ type, icon, text, clickHandler }) => {
+export const MainButton= ({ type, icon, text, clickHandler }: ButtonProps) => {
   /////////// VARIABLES
   ///
 

@@ -1,7 +1,7 @@
 /////////// IMPORTS
 ///
 import { useEffect } from "react"
-import { FC, useState } from "react"
+import { useState } from "react"
 import classes from "./Answer.module.css"
 ///
 /////////// Types
@@ -21,14 +21,14 @@ interface AnswerProps {
 ///
 
 ///
-export const Answer: FC<AnswerProps> = ({
+export const Answer = ({
   answer,
   clickOnAnswer,
   currentPOS,
   answerSelected,
   progress,
   toggleRetry,
-}) => {
+}: AnswerProps) => {
   /////////// VARIABLES
   ///
   const [interactingClass, interactingClassUpdater] = useState("")

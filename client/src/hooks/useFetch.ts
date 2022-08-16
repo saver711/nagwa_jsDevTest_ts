@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
-export default function useFetch(url: string, options?: object) {
-  const [data, dataUpdater] = useState<any>([])
+export default function useFetch<T>(url: string, options?: object) {
+  const [data, dataUpdater] = useState<T | []>([])
   const [error, errorUpdater] = useState(false)
   const [loading, loadingUpdater] = useState(false)
   /* i am using object here as initial value because it is (reference type) so when i call it:

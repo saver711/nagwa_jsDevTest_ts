@@ -2,11 +2,11 @@
 ///
 import classes from "./Rank.module.css"
 import useFetch from "../../hooks/useFetch"
-import { FC, useCallback, useRef } from "react"
+import { useCallback, useRef } from "react"
 import downloadjs from "downloadjs"
 import html2canvas from "html2canvas"
 import { BsArrowCounterclockwise, BsCloudDownload } from "react-icons/bs"
-import { Button } from "../UI/button/Button"
+import { MainButton } from "../UI/mainButton/MainButton"
 
 ///
 /////////// Types
@@ -21,12 +21,12 @@ interface RankProps {
 ///
 
 ///
-export const Rank: FC<RankProps> = ({
+export const Rank = ({
   rightAnswers,
   wrongAnswers,
   wordsLength,
   retryHandler,
-}) => {
+}: RankProps) => {
   /////////// VARIABLES
   ///
   /*--- ⬇️ i will use this to handle capturing and downloading result image ---*/
@@ -42,7 +42,7 @@ export const Rank: FC<RankProps> = ({
     error,
     loading,
     refetch,
-  } = useFetch(`${process.env.REACT_APP_SERVER}/rank`, {
+  } = useFetch<number>(`${process.env.REACT_APP_SERVER}/rank`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ score: sentScore }),
@@ -115,9 +115,7 @@ export const Rank: FC<RankProps> = ({
             <span>{wrongAnswers}</span>
             <span className={`capitalize`}>wrong answers</span>
           </li>
-          <li
-            className={`centerFlex centerText ${classes.statics__item}`}
-          >
+          <li className={`centerFlex centerText ${classes.statics__item}`}>
             <span>{skippedAnswers}</span>
             <span className={`capitalize`}>skipped answers</span>
           </li>
@@ -126,13 +124,13 @@ export const Rank: FC<RankProps> = ({
 
       <div className={`centerFlex`}>
         <>
-          <Button
+          <MainButton
             type="primary"
             icon={<BsCloudDownload />}
             text="Download"
             clickHandler={handleCaptureClick}
           />
-          <Button
+          <MainButton
             type="transparent"
             icon={<BsArrowCounterclockwise />}
             text="Retry"

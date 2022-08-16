@@ -1,6 +1,6 @@
 /////////// IMPORTS
 ///
-import { FC } from "react"
+
 import classes from "./Question.module.css"
 ///
 /////////// Types
@@ -17,7 +17,7 @@ interface QuestionProps {
 ///
 
 ///
-export const Question: FC<QuestionProps> = ({ qs }) => {
+export const Question = ({ qs }: QuestionProps) => {
   /////////// VARIABLES
   ///
   const word = qs?.word
@@ -25,7 +25,6 @@ export const Question: FC<QuestionProps> = ({ qs }) => {
   const sentence_1 = sentence?.slice(0, sentence.indexOf(word))
   const sentence_2 = sentence?.slice(sentence.indexOf(word) + word.length)
 
-  
   ///
   /////////// CUSTOM HOOKS
   ///

@@ -5,9 +5,6 @@ import dotenv from "dotenv" //load environment variables from a .env file
 import fs from "fs"
 const bodyParser = require("body-parser")
 
-//for heroku
-const path = require('path')
-
 // config 👨‍🔧
 const app: Application = express() // start a new Express application
 app.use(cors())
@@ -22,12 +19,14 @@ interface POS_Data_Type {
   scoresList: number[]
 }
 const POS_Data: POS_Data_Type = JSON.parse(
-  fs.readFileSync("./DummyData/TestData.json", "utf8")
+  fs.readFileSync("DummyData/TestData.json", "utf8")
 )
-const wordList: string[] = POS_Data.wordList
-const scoresList: number[] = POS_Data.scoresList
+
+const wordList = POS_Data.wordList
+const scoresList = POS_Data.scoresList
 
 //routes 🔀
+
 /* ----- ⬇️ get WordList ----- */
 const desiredListLength = 10
 
@@ -46,25 +45,14 @@ app.post("/rank", jsonParser, (req: Request, res: Response) => {
 
   const rank = (scoresBelowStudentScore / scoresList.length) * 100
 
-  /* ----- ⬇️ EXAMPLE: 30% || 30.26% ----- */
+  /* - ⬇️ EXAMPLE: 30% || 30.26% - */
   const sentRank = rank % 1 != 0 ? rank.toFixed(2) : rank
 
   res.json(sentRank)
 })
-//for heroku
-app.use(express.static(path.join(__dirname, "../client/build")))
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"))
-})
-/* server > package.json
-  "heroku-postbuild": "cd client && npm install && npm run build"
-*/
-/* client > env
-REACT_APP_SERVER=https://englishexam.herokuapp.com/server
- */
 
 // make the server listen to requests 🙉
 const PORT = process.env.PORT || 8000
 app.listen(PORT, () =>
-  console.log(`Server running at: http://localhost:${PORT}/`)
+  console.log(`Server is running at: http://localhost:${PORT}/`)
 )

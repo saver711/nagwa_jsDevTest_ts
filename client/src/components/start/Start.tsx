@@ -1,8 +1,8 @@
 /////////// IMPORTS
 ///
-import React, { FC } from "react"
+import React from "react"
 import { Modes } from "../../App"
-import { Button } from "../UI/button/Button"
+import { MainButton } from "../UI/mainButton/MainButton"
 import classes from "./Start.module.css"
 ///
 /////////// Types
@@ -19,7 +19,7 @@ const testInfo = {
   img: require("../../assets/imgs/study.png"),
 }
 ///
-export const Start: FC<StartProps> = ({ modeUpdateHandler }) => {
+export const Start = ({ modeUpdateHandler }: StartProps) => {
   /////////// VARIABLES
   ///
 
@@ -63,9 +63,7 @@ export const Start: FC<StartProps> = ({ modeUpdateHandler }) => {
             definition
           </h4>
 
-          <h2 className={`capitalize`}>
-            {testInfo.name}
-          </h2>
+          <h2 className={`capitalize`}>{testInfo.name}</h2>
 
           <p className={`${classes.box__mainText}`}>{testInfo.description}</p>
 
@@ -73,10 +71,13 @@ export const Start: FC<StartProps> = ({ modeUpdateHandler }) => {
         </div>
 
         <div className={`centerFlexX`}>
-          <Button clickHandler={clickHandler} type="primary" text="Start" />
+          <MainButton clickHandler={clickHandler} type="primary" text="Start" />
         </div>
 
-        <p className={`${classes.start__note} centerText centerMargin`}>Note: Once you click on START, Don't leave test page or the test will be cancelled.</p>
+        <p className={`${classes.start__note} centerText centerMargin`}>
+          Note: Once you click on START, Don't leave test page or the test will
+          be cancelled.
+        </p>
       </section>
     </>
   )

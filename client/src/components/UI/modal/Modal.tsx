@@ -2,7 +2,7 @@
 ///
 import classes from "./Modal.module.css"
 import { createPortal } from "react-dom"
-import React, { FC } from "react"
+import React from "react"
 import { useEffect, useRef } from "react"
 import { ImCross } from "react-icons/im"
 
@@ -16,7 +16,7 @@ interface ModalProps {
   children: React.ReactNode
 }
 ///
-export const Modal: FC<ModalProps> = ({ children, modalVisibilityUpdater }) => {
+export const Modal = ({ children, modalVisibilityUpdater }: ModalProps) => {
   /////////// VARIABLES
   ///
   /*--- ⬇️ i will use it to handle clicking outside this element ---*/

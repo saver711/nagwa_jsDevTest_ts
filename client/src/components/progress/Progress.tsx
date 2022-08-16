@@ -1,6 +1,5 @@
 /////////// IMPORTS
 ///
-import { FC } from "react"
 import classes from "./Progress.module.css"
 ///
 /////////// Types
@@ -13,7 +12,7 @@ interface progressProps {
 ///
 
 ///
-export const Progress: FC<progressProps> = ({ progress, wordsLength }) => {
+export const Progress = ({ progress, wordsLength }: progressProps) => {
   /////////// VARIABLES
   ///
   const progressPercentage = Math.round((progress / wordsLength) * 100)
@@ -49,7 +48,7 @@ export const Progress: FC<progressProps> = ({ progress, wordsLength }) => {
           width: `${!progress ? "0px" : `calc(${progressPercentage}% + 5px)`}`,
         }}
         className={`${classes.progress__bar} ${
-          progress ? "blackBoldBorder" : ''
+          progress ? "blackBoldBorder" : ""
         }`}
       ></div>
 
