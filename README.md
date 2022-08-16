@@ -51,14 +51,12 @@ Install dependencies
 Start server
 
 ```bash
-  cd server
   npm run devStart
 ```
 
 Start client
 
 ```bash
-  cd client
   npm start
 ```
 
