@@ -15,7 +15,7 @@ interface RankProps {
   rightAnswers: number
   wrongAnswers: number
   wordsLength: number
-  retryHandler: React.MouseEventHandler<HTMLButtonElement>
+  retryHandler: ()=> void
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///

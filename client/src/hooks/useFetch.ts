@@ -14,6 +14,7 @@ export default function useFetch<T>(url: string, options?: object) {
     ;(async () => {
       try {
         loadingUpdater(true)
+        errorUpdater(false)
         const res = await fetch(url, options)
         const comingData = await res.json()
         dataUpdater(comingData)

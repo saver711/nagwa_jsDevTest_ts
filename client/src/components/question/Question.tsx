@@ -1,23 +1,17 @@
 /////////// IMPORTS
 ///
 
+import { wordsType } from "../../App"
 import classes from "./Question.module.css"
 ///
 /////////// Types
 ///
-interface QuestionProps {
-  qs: {
-    word: string
-    id: number
-    pos: string
-    sentence: string
-  }
-}
+
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
 
 ///
-export const Question = ({ qs }: QuestionProps) => {
+export const Question = ({ qs }: { qs: wordsType }) => {
   /////////// VARIABLES
   ///
   const word = qs?.word

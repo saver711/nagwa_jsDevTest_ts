@@ -32,9 +32,9 @@ import { Button } from "./components/UI/buton/Button"
 ///
 /////////// Types
 ///
-interface wordsType {
-  id: number
+export interface wordsType {
   word: string
+  id: number
   pos: string
   sentence: string
 }
@@ -74,7 +74,6 @@ export const App = () => {
     loading,
     refetch,
   } = useFetch<wordsType[]>(`${process.env.REACT_APP_SERVER}/words`)
-
 
   const wordsLength = words.length
 

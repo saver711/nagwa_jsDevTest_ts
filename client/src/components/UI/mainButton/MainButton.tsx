@@ -8,7 +8,7 @@ interface ButtonProps {
   type: "primary" | "transparent"
   icon?: React.ReactNode
   text: string
-  clickHandler: React.MouseEventHandler<HTMLButtonElement>
+  clickHandler: () => void
 }
 /////////// HELPER VARIABLES & FUNCTIONS
 ///
