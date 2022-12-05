@@ -1,3 +1,6 @@
+## Live
+
+https://pot-test-app.onrender.com
 
 ## 🚀 About Me
 #### Hi, I'm Ahmed Hasan! 👋
@@ -63,7 +66,7 @@ Start client
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env files
+To run this project, you will need to add the following environment variables to your .env file
 
 #### Client
 `REACT_APP_SERVER=http://localhost:8000`
