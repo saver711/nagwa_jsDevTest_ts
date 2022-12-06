@@ -10,7 +10,7 @@
     "express": "^4.18.1"
   },
   "scripts": {
-    "devStart": "nodemon src/server.ts"
+    "start": "nodemon src/server.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

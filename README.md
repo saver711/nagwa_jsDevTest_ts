@@ -54,7 +54,7 @@ Install dependencies
 Start server
 
 ```bash
-  npm run devStart
+  npm start
 ```
 
 Start client
