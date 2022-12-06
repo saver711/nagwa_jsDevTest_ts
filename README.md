@@ -1,6 +1,6 @@
 ## Live
 
-https://post-test-app.netlify.app/ || https://pot-test-app.onrender.com
+https://post-test-app.netlify.app/ (Needs hard refresh) || https://pot-test-app.onrender.com
 
 ## 🚀 About Me
 #### Hi, I'm Ahmed Hasan! 👋
